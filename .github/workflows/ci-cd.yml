@@ -113,6 +113,7 @@ jobs:
             latest
       
       - name: Build Docker image
+        run: docker build -t ghcr.io/${{ github.actor }}/devsecops-demo:latest .
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -124,7 +125,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: devsecops-demo:latest
+          image-ref: ghcr.io/${{ github.actor }}/devsecops-demo:latest
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -132,6 +133,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
       
       - name: Push Docker image
+        run: docker push ghcr.io/${{ github.actor }}/devsecops-demo:latest
         uses: docker/build-push-action@v5
         with:
           context: .
