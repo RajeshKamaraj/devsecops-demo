@@ -113,7 +113,6 @@ jobs:
             latest
       
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.actor }}/devsecops-demo:latest .
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -133,7 +132,6 @@ jobs:
           severity: 'CRITICAL,HIGH'
       
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.actor }}/devsecops-demo:latest
         uses: docker/build-push-action@v5
         with:
           context: .
